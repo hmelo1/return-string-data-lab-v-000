@@ -2,18 +2,20 @@
   <%= render partial: "products", locals: {product: product} %>
 <% end %>
 
-<script type="text/javascript" charset="utf-8">
-$(function () {
-  $(".js-more").on('click', function () {
+<script type="text/javascript">
+  $(function () {
+    $(".js-more").on('click', function() {
+    // get the id from the data attribute
     var id = $(this).data("id");
-    $.get("/products/" + id + "/description", function (description) {
-      $.get("/products/" + id + "/inventory", function (inventory) {
-        var inventoryStatus = 'Available';
-        if (inventory === 'false') {
-          inventoryStatus = 'Sold Out';
+    $.get("/products/" + id + "/description", function(desc) {
+      $.get("/products/" + id + "/inventory", function(inventory) {
+        var inventoryText = "Available"
+        if (inventory === "false") {
+          inventoryText = "Sold Out"
         }
-        var moreInfoText = description + "<br>" + inventoryStatus;
-        $("#product-" + id).html(moreInfoText);
+        var descriptionText = "<p>" + desc + "</p><p>" + inventoryText + "</p>";
+        debugger
+        $("#product-" + id).html(descriptionText);
       });
     });
   });
