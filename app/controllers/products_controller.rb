@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
   end
 
   def inventory
-    render plain: @product.inventory > 0
+    render plain: @product.inventory
   end
 
   private
